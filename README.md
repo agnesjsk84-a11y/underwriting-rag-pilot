@@ -7,7 +7,7 @@
 | 항목 | 내용 |
 |---|---|
 | **목적** | 의료 문서를 벡터 DB로 구축하고 LLM으로 언더라이팅 관련 질의응답 제공 |
-| **배경** | 카카오헬스케어 JD 기반 — RAG, LLM Agent, 의료 AI 실무 역량 파일럿 |
+| **배경** | 의료·헬스케어 도메인 AI 실무 역량 강화를 위한 개인 파일럿 — RAG · LLM Agent · 벡터 검색 end-to-end 구현 |
 | **기간** | 2026년 7월 |
 | **개발 환경** | Google Colab (무료) |
 | **최종 스택** | Groq API + LangChain + FAISS + ipywidgets |
