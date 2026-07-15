@@ -1,0 +1,43 @@
+name: RWE data validator
+
+on:
+  push:
+    paths:
+      - "rwe-validator/**"
+      - ".github/workflows/rwe-validator.yml"
+  pull_request:
+    paths:
+      - "rwe-validator/**"
+      - ".github/workflows/rwe-validator.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run unit tests
+        run: python3 -m unittest discover -s rwe-validator/tests -v
+
+      - name: Validate synthetic example
+        run: |
+          python3 rwe-validator/src/rwe_validator.py \
+            --input rwe-validator/examples/patients.csv \
+            --rules rwe-validator/config/validation-rules.json \
+            --output-json rwe-validator/reports/validation-report.json \
+            --output-md rwe-validator/reports/validation-report.md
+
+      - name: Upload validation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: rwe-validation-report
+          path: rwe-validator/reports/validation-report.*
