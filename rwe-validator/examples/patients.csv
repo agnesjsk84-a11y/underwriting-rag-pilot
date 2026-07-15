@@ -1,0 +1,4 @@
+patient_id,sex_code,age,index_date,followup_date,diagnosis_code,score
+P0001,F,72,2026-01-15,2026-04-15,G30.1,24
+P0002,M,68,2026-02-03,2026-05-10,G30.0,27
+P0003,U,81,2026-02-20,,G30.9,

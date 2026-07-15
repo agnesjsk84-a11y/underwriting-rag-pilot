@@ -1,0 +1,73 @@
+{
+  "dataset": "rwe_patient_followup",
+  "version": "1.0.0",
+  "description": "합성 RWE 환자 추적 데이터 검증 규칙",
+  "unique_keys": [
+    {
+      "name": "patient_visit_unique",
+      "columns": ["patient_id", "index_date"],
+      "severity": "error"
+    }
+  ],
+  "columns": [
+    {
+      "name": "patient_id",
+      "type": "string",
+      "required": true,
+      "severity": "error"
+    },
+    {
+      "name": "sex_code",
+      "type": "string",
+      "required": true,
+      "allowed_values": ["F", "M", "U"],
+      "severity": "error"
+    },
+    {
+      "name": "age",
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "max": 120,
+      "severity": "error"
+    },
+    {
+      "name": "index_date",
+      "type": "date",
+      "format": "%Y-%m-%d",
+      "required": true,
+      "severity": "error"
+    },
+    {
+      "name": "followup_date",
+      "type": "date",
+      "format": "%Y-%m-%d",
+      "required": false,
+      "severity": "warning"
+    },
+    {
+      "name": "diagnosis_code",
+      "type": "string",
+      "required": true,
+      "allowed_values": ["G30.0", "G30.1", "G30.8", "G30.9"],
+      "severity": "warning"
+    },
+    {
+      "name": "score",
+      "type": "number",
+      "required": false,
+      "min": 0,
+      "max": 30,
+      "severity": "warning"
+    }
+  ],
+  "date_order_rules": [
+    {
+      "name": "followup_not_before_index",
+      "start": "index_date",
+      "end": "followup_date",
+      "format": "%Y-%m-%d",
+      "severity": "error"
+    }
+  ]
+}
